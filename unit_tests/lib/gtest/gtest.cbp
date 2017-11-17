@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="gtest"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\..\opt\local\;CMake Files\..\..\..\..\..\..\opt\local\share\;CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\;CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\;CMake Files\Hubbard_Head\;CMake Files\unit_tests\;CMake Files\unit_tests\lib\;CMake Files\unit_tests\lib\gtest\;CMake Files\unit_tests\lib\gtest\cmake\;CMake Files\unit_tests\basic_tests\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main">
+				<Option output="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/Hubbard_Head"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/include"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 gtest_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main/fast">
+				<Option output="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/Hubbard_Head"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/include"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest">
+				<Option output="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/Hubbard_Head"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/include"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 gtest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest/fast">
+				<Option output="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/Hubbard_Head"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/include"/>
+					<Add directory="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/src/gtest-all.cc">
+			<Option target="gtest"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/src/gtest_main.cc">
+			<Option target="gtest_main"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/../../../../../../opt/local/share/eigen3/cmake/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\eigen3\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/Hubbard_Head/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Hubbard_Head\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/Hubbard_Head/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Hubbard_Head\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\lib\gtest\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\lib\gtest\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\lib\gtest\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\unit_tests\lib\gtest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\unit_tests\lib\gtest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/lib/gtest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\unit_tests\lib\gtest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/basic_tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\basic_tests\"/>
+		</Unit>
+		<Unit filename="/Users/wulfix/Desktop/Cursussen_Gent/Thesis/HubbardModel/unit_tests/basic_tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\unit_tests\basic_tests\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
