@@ -27,7 +27,7 @@ public:
     /**
      * Ask for
      */
-    double hopElement(unsigned site1, unsigned site2);
+    double getElement(unsigned site1, unsigned site2)const;
     unsigned getLength()const;
 
 

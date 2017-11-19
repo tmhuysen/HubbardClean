@@ -8,6 +8,7 @@
 
 #include "Lattice.h"
 #include "AddressingMatrix.h"
+#include <boost/math/special_functions.hpp>
 
 class Hubbard
 {
@@ -24,8 +25,9 @@ private:
     //          spin_sectors[0]     is the spin sector with the lowest number of alpha electrons (0)
     //          spin_sectors[N]   is the spin sector with the highest number of alpha electrons (N)
     std::vector<SpinSector> spinSectors;
-    // For each distribution of electrons we will need a different addressingsMatrix
-    std::vector<AddressingMatrix> addressingMatrixs;
+    // For each distribution of electrons we will need a different addressingsMatrix these may be same for several spin sectors
+    // So we storing them allows us to only generate them once.
+    std::vector<AddressingMatrix> addressing_list;
 
     void generateAddressingMatrix();
     void calculate();
@@ -43,22 +45,21 @@ private:
         unsigned N_alpha;   // Number of alpha electrons
         unsigned N_beta;    // Number of beta electrons
 
-        unsigned long N_bf;
+
+
+        unsigned long n_bf;
+        unsigned long n_bf_alpha;
+        unsigned long n_bf_beta;
 
         arma::mat hamiltonian;
         arma::vec eigenvalues;
         arma::mat eigenvectors;
 
-        /**
-        * nesting to prevent circular inclusion
-        */
-        class SingleSpinEvaluation{
-        private:
-            unsigned N_electrons;
-            SpinSector& p; //parent
-        public:
-            SingleSpinEvaluation();
-        };
+        void calculateSector(unsigned long start, unsigned long end);
+
+        void addToHamiltonian(double value, size_t index1, size_t index2);
+        //void calculateOneSpin(unsigned long bf_m_el, unsigned n_m_el,unsigned long bf_c_el, unsigned n_c_el, unsigned long start, unsigned long end);
+
 
 
     public:

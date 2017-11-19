@@ -82,4 +82,23 @@ boost::dynamic_bitset<> bitslice(const boost::dynamic_bitset<>& u, unsigned long
  */
 unsigned long count_double_occupancies(const boost::dynamic_bitset<>& u, const boost::dynamic_bitset<>& v);
 
+
+/**
+ *  Applies the annihilation operator (without sign evaluation)
+ *  returns bool according to succes.
+ */
+bool annihilation( boost::dynamic_bitset<>& u, unsigned long i);
+/**
+ *  Applies the creation operator (without sign evaluation)
+ *  returns bool according to succes.
+ */
+bool creation( boost::dynamic_bitset<>& u, unsigned long i);
+
+/**
+ * Evaluates the sign change between two (spin spererated) base vectors
+ * (only for vectors changed by one creation and one annihilation operators)
+ */
+
+int phaseCheck( const boost::dynamic_bitset<>& u, const boost::dynamic_bitset<>& v);
+
 #endif //HUBBARDCLEAN_BITSET_H

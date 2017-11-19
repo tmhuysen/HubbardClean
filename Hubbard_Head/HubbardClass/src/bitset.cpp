@@ -143,3 +143,47 @@ boost::dynamic_bitset<> bitslice(const boost::dynamic_bitset<>& u, unsigned long
 
     auto slice_length = j - i + 1;  // number of bits the slice will have
 }
+
+bool annihilation( boost::dynamic_bitset<>& u, unsigned long anni){
+    if ((u[anni])) {
+        u[anni] = false;
+        return true;
+    } else {
+        return false;
+    }
+}
+bool creation( boost::dynamic_bitset<>& u, unsigned long crea){
+    if (!(u[crea])){
+        u[crea] = true;
+        return true;
+    }else{
+        return false;
+    }
+}
+
+int phaseCheck( const boost::dynamic_bitset<>& u, const boost::dynamic_bitset<>& v){
+    int phase_factor = 1;
+
+    auto changed_indices = u ^ v;
+    auto first_site_index = changed_indices.find_first();
+    auto second_site_index = changed_indices.find_next(first_site_index);
+
+    auto no_indices_in_between = second_site_index - first_site_index - 1;
+    if (no_indices_in_between == 0) {
+        // If there are no indices in between, the phase factor is (+1), since no equal-spin electrons are passed over
+    } else {
+        // In the region [first_site_index+1, second_site_index-1], both basis vectors bf1 and bf2 are equal, so it doesn't matter which one we take to take a bitslice
+
+        boost::dynamic_bitset<> subbitset = bitslice(u, first_site_index + 1, second_site_index - 1);
+        if (subbitset.count() % 2 == 0) {
+            // For even number of ones, the phase factor is +1
+            phase_factor = 1;
+        } else {
+            // For odd number of ones, the phase factor is -1
+            phase_factor = -1;
+        }
+    }
+
+    return phase_factor;
+
+}

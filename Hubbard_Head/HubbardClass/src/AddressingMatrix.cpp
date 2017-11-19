@@ -78,12 +78,12 @@ unsigned long AddressingMatrix::fetchAddress(boost::dynamic_bitset<> bitVector) 
 }
 
 boost::dynamic_bitset<> AddressingMatrix::generateBinaryVector(unsigned long address){
-    boost::dynamic_bitset<> biVector = boost::dynamic_bitset<>();
+    boost::dynamic_bitset<> biVector = boost::dynamic_bitset<>(n_sites);
     int eIndex = n_electrons;
     // Enter an address, it will then look for the biggest diagonal difference between 2 set of elements in the diagram
     // that is smaller or equal to the address, when it can move diagonally it adds 1 to bitvector at the final index.
     // It will then remove the weight(aka the diffrence between diagonals) from the address.
-    // if it cannot move diagonally it will move vertically up in the diagram and add 0 instead and shit to next highest index.
+    // if it cannot move diagonally it will move vertically up in the diagram and add 0 instead and shift to next highest index.
     // ex: 2 electrons and 5 sites.
     // address 5
     // 10-4 = 6 : 0 : 5

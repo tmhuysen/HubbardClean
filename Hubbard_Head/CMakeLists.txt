@@ -22,3 +22,8 @@ if (Boost_FOUND)
     target_link_libraries (Hubbard_Head_run ${Boost_LIBRARIES})
 endif()
 
+find_package(Armadillo)
+if (Armadillo_FOUND)
+    include_directories(${Armadillo_INCLUDE_DIR})
+    target_link_libraries (Hubbard_Head_run ${Armadillo_LIBRARIES})
+endif()

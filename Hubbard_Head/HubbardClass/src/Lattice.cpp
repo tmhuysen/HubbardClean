@@ -4,10 +4,6 @@
 
 #include "HubbardClass/include/Lattice.h"
 
-double Lattice::hopElement(unsigned site1, unsigned site2)
-{
-    return H.(site1,site2);
-}
 
 Lattice::Lattice(const arma::mat &H) {
     this->H = H;
@@ -21,4 +17,8 @@ Lattice::Lattice(const arma::umat &A, double t, double U) {
 
 unsigned Lattice::getLength()const {
     return this->L;
+}
+
+double Lattice::getElement(unsigned site1, unsigned site2)const {
+    return H.(site1,site2);
 }

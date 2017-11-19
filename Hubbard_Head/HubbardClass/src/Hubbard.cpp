@@ -16,11 +16,16 @@ Hubbard::Hubbard(unsigned N, const Lattice &lattice): lattice(lattice) {
 
 void Hubbard::generateAddressingMatrix() {
     for(unsigned electrons = 0; electrons<N;electrons++){
-        addressingMatrixs.push_back(AddressingMatrix(lattice.getLength(),electrons));
+        addressing_list.push_back(AddressingMatrix(lattice.getLength(),electrons));
     }
 
 }
 
 void Hubbard::calculate() {
+    for(unsigned i= 0; i<N+1;i++){
+        spinSectors.push_back(SpinSector(*this,-static_cast<int>(N) + 2 * i));
+    }
 
 }
+
+
