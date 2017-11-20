@@ -142,6 +142,7 @@ boost::dynamic_bitset<> bitslice(const boost::dynamic_bitset<>& u, unsigned long
     }
 
     auto slice_length = j - i + 1;  // number of bits the slice will have
+    return boost::dynamic_bitset<>();
 }
 
 bool annihilation( boost::dynamic_bitset<>& u, unsigned long anni){
