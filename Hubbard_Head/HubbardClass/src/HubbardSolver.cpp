@@ -42,9 +42,8 @@ void Hubbard::HubbardSolver::groundStates(State key) {
 
 }
 
-Hubbard::HubbardSolver::HubbardSolver() : hubbard(Hubbard()){
+//Hubbard::HubbardSolver::HubbardSolver() : hubbard(Hubbard()){
 
-}
 
 
 bool compareState(const State &o1, const State &o2){

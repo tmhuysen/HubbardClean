@@ -100,7 +100,7 @@ private:
     class HubbardSolver {
 
     private:
-        Hubbard hubbard;   // REFERENCE to a Hubbard instance. In this case, a reference IS needed, as we're going to make changes to the Hubbard instance (modifying the eigenvalues and eigenvectors of all its SpinSectors).
+        Hubbard &hubbard;   // REFERENCE to a Hubbard instance. In this case, a reference IS needed, as we're going to make changes to the Hubbard instance (modifying the eigenvalues and eigenvectors of all its SpinSectors).
 
         std::vector<State> groundstates;      // The ground states  of the Hubbard system (i.e. the state with the lowest energy).
 
@@ -114,13 +114,13 @@ private:
         /** Constructor based on a given Hubbard instance
          */
         HubbardSolver(Hubbard& hubbard);
-        HubbardSolver();
+        //HubbardSolver();
 
 
     };
 public:
     Hubbard(unsigned N, const Lattice& lattice);
-    Hubbard & Hubbard():lattice(Lattice()){};
+     //Hubbard & Hubbard():lattice(Lattice()){};
     const std::vector<SpinSector> &getSpinSectors() const;
 
 private:
@@ -133,8 +133,9 @@ private:
     //          spin_sectors[0]     is the spin sector with the lowest number of alpha electrons (0)
     //          spin_sectors[N]   is the spin sector with the highest number of alpha electrons (N)
     std::vector<SpinSector> spinSectors;
+    std::vector<HubbardSolver> solver;
 
-    HubbardSolver solvedHubbard;
+    //HubbardSolver solvedHubbard;
 
     // For each distribution of electrons we will need a different addressingsMatrix these may be same for several spin sectors
     // So we storing them allows us to only generate them once.

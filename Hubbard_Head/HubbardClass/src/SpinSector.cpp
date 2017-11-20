@@ -46,7 +46,7 @@ Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
 }
 
 
-Hubbard::SpinSector::SpinSector() = default;
+//Hubbard::SpinSector::SpinSector() = default;
 
 void Hubbard::SpinSector::calculateSector(double start, double end) {
     AddressingMatrix ad_a = p.addressing_list.at(N_alpha);

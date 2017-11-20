@@ -12,7 +12,7 @@ Hubbard::Hubbard(unsigned N, const Lattice &lattice): lattice(lattice) {
     }
     generateAddressingMatrix();
     calculate();
-    solvedHubbard =  HubbardSolver(*this);
+    solver.push_back(HubbardSolver(*this));
 }
 
 void Hubbard::generateAddressingMatrix() {
