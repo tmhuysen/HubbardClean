@@ -36,7 +36,6 @@ std::vector<boost::dynamic_bitset<>> all_bitset_permutations(const boost::dynami
  */
 boost::dynamic_bitset<> smallest_bitset(size_t length, size_t nones);
 
-#endif //HUBBARD_BITSET_HPP
 
 /** Checks if the given bitset is the lexicographical smallest one.
  */

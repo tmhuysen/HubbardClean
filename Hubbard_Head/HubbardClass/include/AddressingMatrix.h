@@ -6,7 +6,7 @@
 #define HUBBARDMODEL_ADDRESSINGMATRIX_H
 
 #include "HubbardClass/include/bitset.h"
-
+#include <iostream>
 #include <Eigen/Dense>
 class AddressingMatrix {
 private:

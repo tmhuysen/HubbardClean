@@ -20,5 +20,5 @@ unsigned Lattice::getLength()const {
 }
 
 double Lattice::getElement(unsigned site1, unsigned site2)const {
-    return H.(site1,site2);
+    return H(site1,site2);
 }

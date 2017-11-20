@@ -2,7 +2,7 @@
 // Created by Wulfix on 16/11/2017.
 //
 
-#include "bitset.h"
+#include "HubbardClass/include/bitset.h"
 
 #include <boost/math/special_functions.hpp>
 

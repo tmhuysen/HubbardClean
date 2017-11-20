@@ -23,6 +23,7 @@ public:
     /** Constructor based on the hopping matrix H
      */
     Lattice(const arma::mat& H);
+    Lattice():H(arma::mat()){};
 
     /**
      * Ask for

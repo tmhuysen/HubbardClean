@@ -18,14 +18,14 @@ Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
     auto n_bf_alpha_ = boost::math::binomial_coefficient<double>(this->p.lattice.getLength(), this->N_alpha);
     if (n_bf_alpha_ > 4294967295.0) {
         // before casting into unsigned long, we have to make sure that it can fit
-        throw std::overflow_error("The number of basis functions for the separated sector is too high to be cast into unsigned long.");
+        throw std::overflow_error("The number of basis functions for the separated sector is too high to be cast into unsigned long. - ALPHA");
     }
     this->n_bf_alpha = static_cast<unsigned long>(n_bf_alpha_);
 
-    auto n_bf_beta_ = boost::math::binomial_coefficient<double>(this->p.lattice.getLength(), this->N_alpha);
+    auto n_bf_beta_ = boost::math::binomial_coefficient<double>(this->p.lattice.getLength(), this->N_beta);
     if (n_bf_beta_ > 4294967295.0) {
         // before casting into unsigned long, we have to make sure that it can fit
-        throw std::overflow_error("The number of basis functions for the separated sector is too high to be cast into unsigned long.");
+        throw std::overflow_error("The number of basis functions for the separated sector is too high to be cast into unsigned long. - BETA");
     }
     this->n_bf_beta = static_cast<unsigned long>(n_bf_beta_);
 
@@ -40,16 +40,15 @@ Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
     // Upon initialization, allocate memory for the Hamiltonian matrix. Make sure this initialized a zero matrix.
     this->hamiltonian = arma::zeros(this->n_bf, this->n_bf);
 
-
-}
-
-
-Hubbard::SpinSector::SpinSector():p(){
+    calculateSector(0.0,1.0);
 
 
 }
 
-void Hubbard::SpinSector::calculateSector(unsigned long start, unsigned long end) {
+
+Hubbard::SpinSector::SpinSector() = default;
+
+void Hubbard::SpinSector::calculateSector(double start, double end) {
     AddressingMatrix ad_a = p.addressing_list.at(N_alpha);
     AddressingMatrix ad_b = p.addressing_list.at(N_beta);
 
@@ -66,7 +65,7 @@ void Hubbard::SpinSector::calculateSector(unsigned long start, unsigned long end
                 for (size_t y = x; y < p.lattice.getLength(); x++) {
                     double element = p.lattice.getElement(x, y);
 
-                    //If these
+                    //If only evaluate non zero elements
                     if (std::abs(element) > 1.0e-06) {
                         boost::dynamic_bitset<> beta_target = boost::dynamic_bitset<>(beta_set);
                         boost::dynamic_bitset<> alpha_target = boost::dynamic_bitset<>(alpha_set);
@@ -97,15 +96,35 @@ void Hubbard::SpinSector::calculateSector(unsigned long start, unsigned long end
         }
         beta_set = next_bitset_permutation(beta_set);
     }
-    hamiltonian = arma::symmatu(hamiltonian);
+    symmetryFill();
 
 }
 
 void Hubbard::SpinSector::addToHamiltonian(double value, size_t index1, size_t index2) {
-    hamiltonian.(index1, index2) = value;
+    hamiltonian(index1, index2) = value;
 
 }
 
+void Hubbard::SpinSector::symmetryFill() {
+    hamiltonian = arma::symmatu(hamiltonian);
+
+}
+
+const arma::mat &Hubbard::SpinSector::getHamiltonian() const {
+    return hamiltonian;
+}
+
+int Hubbard::SpinSector::getS_z() const {
+    return S_z;
+}
+
+void Hubbard::SpinSector::setEigenvalues(const arma::vec &eigenvalues) {
+    SpinSector::eigenvalues = eigenvalues;
+}
+
+void Hubbard::SpinSector::setEigenvectors(const arma::mat &eigenvectors) {
+    SpinSector::eigenvectors = eigenvectors;
+}
 
 
 

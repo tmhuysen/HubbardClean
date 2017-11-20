@@ -3,14 +3,14 @@
 //
 
 #include "HubbardClass/include/AddressingMatrix.h"
-#include <iostream>
+
 
 /*
  * Idea from
  * Trygve Helgaker, Poul Jorgensen, Jeppe Olsen Molecular Electronic-Structure Theory . August 2000.
  *
  */
-AddressingMatrix::AddressingMatrix(unsigned int sites, unsigned int electrons) : n_sites{sites}, n_electrons{electrons}{
+AddressingMatrix::AddressingMatrix(unsigned int sites, unsigned int electrons) : n_sites(sites), n_electrons(electrons){
     generateMatrix();
 
 
@@ -112,7 +112,3 @@ boost::dynamic_bitset<> AddressingMatrix::generateBinaryVector(unsigned long add
     return biVector;
 
 };
-
-void AddressingMatrix::print(){
-    std::cout<<addressMatrix;
-}

@@ -3,7 +3,7 @@ project(Hubbard_Head)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_library(Hubbard_Head HubbardClass/include/bitset.h test.cpp)
+add_library(Hubbard_Head HubbardClass/include/bitset.h test.cpp HubbardClass/src/HubbardSolver.cpp HubbardClass/src/io.cpp HubbardClass/include/io.h HubbardClass/src/OneRDM.cpp HubbardClass/include/OneRDM.h)
 #file(GLOB helloworld_SRC
 #        "*.h"
 #        "*.cpp"
