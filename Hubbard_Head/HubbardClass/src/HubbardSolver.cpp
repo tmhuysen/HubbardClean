@@ -2,7 +2,7 @@
 // Created by Wulfix on 19/11/2017.
 //
 
-#include "HubbardClass/include/Hubbard.h"
+#include "Hubbard.h"
 
 Hubbard::HubbardSolver::HubbardSolver(Hubbard &hubbard) : hubbard(hubbard){
     // Create groundstate with higehest energy possible (avoid using magic numbers).

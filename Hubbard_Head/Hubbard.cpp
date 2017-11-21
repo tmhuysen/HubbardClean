@@ -2,7 +2,7 @@
 // Created by Wulfix on 16/11/2017.
 //
 
-#include "HubbardClass/include/Hubbard.h"
+#include "Hubbard.h"
 
 Hubbard::Hubbard(unsigned N, const Lattice &lattice): lattice(lattice) {
     if (N > (2 * this->lattice.getLength())) {

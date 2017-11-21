@@ -105,6 +105,14 @@ void OneRDM::print() {
 
 }
 
+const arma::mat &OneRDM::getRdmAlpha() const {
+    return rdmAlpha;
+}
+
+const arma::mat &OneRDM::getRdmBeta() const {
+    return rdmBeta;
+}
+
 
 
 

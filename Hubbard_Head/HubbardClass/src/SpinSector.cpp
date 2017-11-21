@@ -2,7 +2,7 @@
 // Created by Wulfix on 18/11/2017.
 //
 
-#include "HubbardClass/include/Hubbard.h"
+#include "Hubbard.h"
 
 
 Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
@@ -78,6 +78,10 @@ void Hubbard::SpinSector::calculateSector(double start, double end) {
 
                             if (annihilation(beta_target, x) && annihilation(alpha_target, x) &&
                                 creation(alpha_target, x) && creation(beta_target, x)) {
+                                // i is the respective position of the beta bitset in the beta only basis,
+                                // in the total basis this means that the next permutation only occurs after all alpha permutaions aka n_bf_alpha.
+                                // j is the respecitve position of te alpha set thus the total position
+                                // thus the total position of a alpha_beta combined bitset is beta_pos*n_bf_alpha + alpha_pos.
                                 addToHamiltonian(element, i * n_bf_alpha + j, i * n_bf_alpha + j);
                             }
                         } else {
@@ -109,7 +113,7 @@ void Hubbard::SpinSector::calculateSector(double start, double end) {
 }
 
 void Hubbard::SpinSector::addToHamiltonian(double value, size_t index1, size_t index2) {
-    hamiltonian(index1, index2) = value;
+    hamiltonian(index1, index2) += value;
 
 }
 

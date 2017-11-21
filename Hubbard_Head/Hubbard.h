@@ -6,10 +6,10 @@
 #define HUBBARDCLEAN_HUBBARD_H
 
 
-#include "Lattice.h"
-#include "AddressingMatrix.h"
+#include "HubbardClass/include/Lattice.h"
+#include "HubbardClass/include/AddressingMatrix.h"
 #include <boost/math/special_functions.hpp>
-#include "io.h"
+#include "HubbardClass/include/io.h"
 
 struct State {
     double eigenValue;          // The energy of the solution, a.k.a. the eigenvalue

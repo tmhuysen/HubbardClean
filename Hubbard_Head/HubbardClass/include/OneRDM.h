@@ -30,6 +30,12 @@ private:
     AddressingMatrix ad_b;
 
     arma::mat rdmAlpha;
+public:
+    const arma::mat &getRdmAlpha() const;
+
+    const arma::mat &getRdmBeta() const;
+
+private:
     arma::mat rdmBeta;
 
 

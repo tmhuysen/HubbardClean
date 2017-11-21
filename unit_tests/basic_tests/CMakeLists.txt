@@ -1,7 +1,9 @@
 include_directories(${googletest_SOURCE_DIR}/include ${googletest_SOURCE_DIR})
 
+
+file(GLOB XXX "*.cpp")
 add_executable(basic_tests
-      test.cpp OneRDM_test.cpp phaseCheck_test.cpp Hubbard_io_test.cpp AddressingMatrix_test.cpp output_solver_hubbard_rdm_test.cpp)
+        ${XXX})
 
 target_link_libraries(basic_tests gtest gtest_main)
 target_link_libraries(basic_tests Hubbard_Head)
