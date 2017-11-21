@@ -8,11 +8,13 @@
 #include <boost/math/special_functions.hpp>
 #include <vector>
 #include <HubbardClass/include/AddressingMatrix.h>
+#include <armadillo>
 #include "HubbardClass/include/bitset.h"
 
 class OneRDM {
 public:
     OneRDM(std::vector<double> coefs, unsigned nup, unsigned ndown, unsigned sites);
+    void print();
 
 
 private:
@@ -27,17 +29,13 @@ private:
     AddressingMatrix ad_a;
     AddressingMatrix ad_b;
 
-    double *rdmAlpha;
-    double *rdmBeta;
+    arma::mat rdmAlpha;
+    arma::mat rdmBeta;
 
-
-
-    double oneRDMAlpha(unsigned i, unsigned j);
 
     void rdmCalc();
-
-
-    double oneRDMBeta(unsigned int i, unsigned int j);
+    double oneRDMAlpha(unsigned long i, unsigned long j);
+    double oneRDMBeta(unsigned long i, unsigned long j);
 };
 
 

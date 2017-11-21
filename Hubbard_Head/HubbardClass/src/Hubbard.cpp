@@ -11,12 +11,13 @@ Hubbard::Hubbard(unsigned N, const Lattice &lattice): lattice(lattice) {
         this->N = N;
     }
     generateAddressingMatrix();
+
     calculate();
-    solver.push_back(HubbardSolver(*this));
+    solvedHubbard.push_back(HubbardSolver(*this));
 }
 
 void Hubbard::generateAddressingMatrix() {
-    for(size_t electrons = 0; electrons<N;electrons++){
+    for(size_t electrons = 0; electrons<N+1;electrons++){
         addressing_list.push_back(AddressingMatrix(lattice.getLength(),electrons));
     }
 
@@ -27,10 +28,27 @@ void Hubbard::calculate() {
         spinSectors.push_back(SpinSector(*this,-static_cast<int>(N) + 2 * i));
     }
 
+
 }
 
 const std::vector<Hubbard::SpinSector> &Hubbard::getSpinSectors() const {
     return spinSectors;
 }
 
+void Hubbard::print(){
+    for(auto x: spinSectors){
+        std::cout<<std::endl;
+        x.print_hamiltonian();
+        std::cout<<std::endl;
+        std::cout<<x.getS_z();
+    }
 
+
+
+
+
+}
+
+std::vector<State> Hubbard::getGroundstates(){
+        return solvedHubbard.at(0).getGroundstates();
+};

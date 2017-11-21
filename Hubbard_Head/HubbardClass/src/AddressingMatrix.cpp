@@ -78,6 +78,9 @@ unsigned long AddressingMatrix::fetchAddress(boost::dynamic_bitset<> bitVector) 
 }
 
 boost::dynamic_bitset<> AddressingMatrix::generateBinaryVector(unsigned long address){
+    if(n_electrons == 0){
+        return boost::dynamic_bitset<>(n_sites);
+    }
     boost::dynamic_bitset<> biVector = boost::dynamic_bitset<>(n_sites);
     int eIndex = n_electrons;
     // Enter an address, it will then look for the biggest diagonal difference between 2 set of elements in the diagram

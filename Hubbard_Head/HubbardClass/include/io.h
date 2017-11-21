@@ -6,9 +6,9 @@
 #define HUBBARDCLEAN_IO_H
 
 #include <armadillo>
+#include <Eigen/Dense>
 
 
-namespace Hubbard {
 
 /** Read and return the hopping matrix from a file that contains its upper triangular representation (since it is symmetric).
  *
@@ -19,7 +19,7 @@ namespace Hubbard {
  *      3
  *      1.0<CHAR>-0.5<CHAR>-0.2<CHAR>1.5<CHAR>-0.7<CHAR>2.3
  */
-    arma::mat read_hopping_matrix_from_file(const std::string& filename, char delimiter_char);
+arma::mat read_hopping_matrix_from_file(const std::string& filename, char delimiter_char);
 
 
 /** Read and process a file with (the upper triangular part of hopping matrices).
@@ -39,8 +39,7 @@ namespace Hubbard {
  */
     void process_file_with_hopping_matrices(const std::string& filename, char delimiter_char);
 
-}
 
 
-
+void Symmatu(Eigen::MatrixXd &mat);
 #endif //HUBBARDCLEAN_IO_H

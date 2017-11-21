@@ -9,10 +9,11 @@
 #include "Lattice.h"
 #include "AddressingMatrix.h"
 #include <boost/math/special_functions.hpp>
+#include "io.h"
 
 struct State {
     double eigenValue;          // The energy of the solution, a.k.a. the eigenvalue
-    arma::vec eigenVector; // The coefficients of the solution with respect to the given basis, a.k.a. the eigenvector corresponding to the eigenvalue
+    Eigen::VectorXd eigenVector; // The coefficients of the solution with respect to the given basis, a.k.a. the eigenvector corresponding to the eigenvalue
     int S_z;            // Total projected spin !!!TIMES 2!!!
     //      For total projected spin = 1/2, S_z = 1
     //      For total projected spin = -1, S_z = -2
@@ -31,18 +32,9 @@ private:
     private:
         Hubbard& p; //parent
         int S_z;
-        arma::vec eigenvalues;
-        arma::mat eigenvectors;
-    public:
-        void setEigenvectors(const arma::mat &eigenvectors);
+        Eigen::VectorXd eigenvalues;
+        Eigen::MatrixXd eigenvectors;
 
-    public:
-        void setEigenvalues(const arma::vec &eigenvalues);
-
-    public:
-        int getS_z() const;
-
-    private:
         // Total projected spin !!!TIMES 2!!!
         //      For total projected spin = 1/2, S_z = 1
         //      For total projected spin = -1, S_z = -2
@@ -53,9 +45,12 @@ private:
         unsigned long n_bf_alpha;
         unsigned long n_bf_beta;
 
-        arma::mat hamiltonian;
+        Eigen::MatrixXd hamiltonian;
     public:
-        const arma::mat &getHamiltonian() const;
+        const Eigen::MatrixXd &getHamiltonian() const;
+        void setEigenvectors(const Eigen::MatrixXd &eigenvectors);
+        void setEigenvalues(const Eigen::VectorXd &eigenvalues);
+        int getS_z() const;
 
     private:
 
@@ -65,14 +60,12 @@ private:
         void symmetryFill();
         //void calculateOneSpin(unsigned long bf_m_el, unsigned n_m_el,unsigned long bf_c_el, unsigned n_c_el, unsigned long start, unsigned long end);
 
-
-
     public:
 
         /** Default constructor
          *
          */
-        SpinSector();
+        //SpinSector();
 
         /** Create a spin sector with
          *      S_z:    integer representation of total projected spin (times 2)
@@ -95,14 +88,19 @@ private:
     };
 
     /**
-     * Solver
+     * Solver only reason this part of the class is because it can then acces the spinsectors, I could make them public instead and this would make a lot more sense.
      */
     class HubbardSolver {
 
     private:
         Hubbard &hubbard;   // REFERENCE to a Hubbard instance. In this case, a reference IS needed, as we're going to make changes to the Hubbard instance (modifying the eigenvalues and eigenvectors of all its SpinSectors).
 
-        std::vector<State> groundstates;      // The ground states  of the Hubbard system (i.e. the state with the lowest energy).
+        std::vector<State> groundstates;
+    public:
+        const std::vector<State> &getGroundstates() const;
+
+    private:
+        // The ground states  of the Hubbard system (i.e. the state with the lowest energy).
 
 
         /** Adds a state to the groundstate list
@@ -114,14 +112,14 @@ private:
         /** Constructor based on a given Hubbard instance
          */
         HubbardSolver(Hubbard& hubbard);
-        //HubbardSolver();
 
 
     };
 public:
     Hubbard(unsigned N, const Lattice& lattice);
-     //Hubbard & Hubbard():lattice(Lattice()){};
     const std::vector<SpinSector> &getSpinSectors() const;
+    void print();
+    std::vector<State> getGroundstates();
 
 private:
     unsigned N; // The number of electrons to place in the lattice
@@ -133,9 +131,8 @@ private:
     //          spin_sectors[0]     is the spin sector with the lowest number of alpha electrons (0)
     //          spin_sectors[N]   is the spin sector with the highest number of alpha electrons (N)
     std::vector<SpinSector> spinSectors;
-    std::vector<HubbardSolver> solver;
 
-    //HubbardSolver solvedHubbard;
+    std::vector<HubbardSolver> solvedHubbard;
 
     // For each distribution of electrons we will need a different addressingsMatrix these may be same for several spin sectors
     // So we storing them allows us to only generate them once.
@@ -143,7 +140,6 @@ private:
 
     void generateAddressingMatrix();
     void calculate();
-
 
 
 

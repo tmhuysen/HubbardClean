@@ -18,38 +18,47 @@ arma::mat read_hopping_matrix_from_file(const std::string& filename, char delimi
 
 
         // Make an uninitialized matrix to avoid going out-of-scope (M is only really initialized in the if)
-        arma::mat M;
-        std::ifstream is (filename);
+    arma::mat M;
+    std::ifstream is (filename);
 
-        if (is.is_open()) {
+    if (is.is_open()) {
             // The dimension of the resulting matrix is found as the first entry in the file name
-            std::string dim_as_string;
-            std::getline(is, dim_as_string);
-            auto dim = static_cast<arma::uword>(std::stoi(dim_as_string));
+        std::string dim_as_string;
+        std::getline(is, dim_as_string);
+        auto dim = static_cast<arma::uword>(std::stoi(dim_as_string));
 
             // Initialize a zero hopping matrix
-            M = arma::zeros(dim, dim);
+        M = arma::zeros(dim, dim);
 
             // Read in the upper triangular part of the hopping matrix.
             // It is located on one line, so we can read in that line, and then break it down.
-            std::string line;
-            std::getline(is, line); // read in the actual line
-            std::stringstream linestream (line); // convert the read line into a stringstream to perform std::getline() on it
+        std::string line;
+        std::getline(is, line); // read in the actual line
+        std::stringstream linestream (line); // convert the read line into a stringstream to perform std::getline() on it
+
 
             // The actual loop to read the upper triangular part of the hopping matrix
-            for (arma::uword i = 0; i < dim; i++) {
-                for (arma::uword j = i; j < dim; j++) {
-                    std::string value_as_string;
-                    std::getline(linestream, value_as_string, delimiter_char);
-                    M(i, j) = std::stod(value_as_string);
-                }
+        for (arma::uword i = 0; i < dim; i++) {
+            for (arma::uword j = i; j < dim; j++) {
+                std::string value_as_string;
+                std::getline(linestream, value_as_string, delimiter_char);
+                M(i, j) = std::stod(value_as_string);
             }
-            is.close();
         }
+        is.close();
+    }
 
         // After this loop, we only have the upper triangular form of the total hopping matrix
         // We can reflect the upper triangle to the lower triangle to obtain our result
-        return arma::symmatu(M);
+    return arma::symmatu(M);;
 }
 
+void Symmatu(Eigen::MatrixXd &mat){
+    for(int x =0; x<mat.innerSize();x++){
+        for (int y = x+1; y<mat.innerSize();y++){
+            mat(y,x) = mat(x,y);
 
+        }
+
+    }
+}

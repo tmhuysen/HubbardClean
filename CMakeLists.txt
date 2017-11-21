@@ -3,7 +3,7 @@ project(HubbardClean)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Hubbard_Head/HubbardClass/src/Hubbard.cpp Hubbard_Head/HubbardClass/include/Hubbard.h unit_tests/basic_tests/test.cpp Hubbard_Head/HubbardClass/src/Lattice.cpp Hubbard_Head/HubbardClass/include/Lattice.h Hubbard_Head/HubbardClass/src/bitset.cpp Hubbard_Head/HubbardClass/src/AddressingMatrix.cpp Hubbard_Head/HubbardClass/include/AddressingMatrix.h Hubbard_Head/HubbardClass/src/SpinSector.cpp)
+set(SOURCE_FILES main.cpp)
 add_executable(Hubbard_Head_run ${SOURCE_FILES})
 
 include_directories(Hubbard_Head)

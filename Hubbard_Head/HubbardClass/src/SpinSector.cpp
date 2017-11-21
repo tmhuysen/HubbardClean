@@ -7,6 +7,7 @@
 
 Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
 {
+
     this->S_z = S_z;
 
     // Convert N and S_z to N_alpha and N_beta
@@ -38,7 +39,7 @@ Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
     this->n_bf = static_cast<unsigned long>(nbf_);
 
     // Upon initialization, allocate memory for the Hamiltonian matrix. Make sure this initialized a zero matrix.
-    this->hamiltonian = arma::zeros(this->n_bf, this->n_bf);
+    this->hamiltonian = Eigen::MatrixXd::Zero(this->n_bf, this->n_bf);
 
     calculateSector(0.0,1.0);
 
@@ -46,23 +47,27 @@ Hubbard::SpinSector::SpinSector(Hubbard &p, int S_z): p(p)
 }
 
 
-//Hubbard::SpinSector::SpinSector() = default;
 
 void Hubbard::SpinSector::calculateSector(double start, double end) {
-    AddressingMatrix ad_a = p.addressing_list.at(N_alpha);
-    AddressingMatrix ad_b = p.addressing_list.at(N_beta);
-
+    AddressingMatrix ad_a = AddressingMatrix(p.lattice.getLength(),N_alpha);
+    AddressingMatrix ad_b = AddressingMatrix(p.lattice.getLength(),N_beta);
+    //AddressingMatrix ad_b = p.addressing_list.at(N_beta);
     //Iterate over the bitvectors
     //These are separated (not sure if i'll keep this way)
+
+
     boost::dynamic_bitset<> beta_set = ad_b.generateBinaryVector(start * n_bf_beta);
+
     for (size_t i = 0; i < n_bf_beta * end; i++) {
-        boost::dynamic_bitset<> alpha_set = ad_b.generateBinaryVector(start * n_bf_alpha);
+        boost::dynamic_bitset<> alpha_set = ad_a.generateBinaryVector(start * n_bf_alpha);
         for (size_t j = 0; j < n_bf_alpha * end; j++) {
+
 
             //Itterate over hopping elements
 
             for (size_t x = 0; x < p.lattice.getLength(); x++) {
-                for (size_t y = x; y < p.lattice.getLength(); x++) {
+                for (size_t y = x; y < p.lattice.getLength(); y++) {
+
                     double element = p.lattice.getElement(x, y);
 
                     //If only evaluate non zero elements
@@ -79,12 +84,12 @@ void Hubbard::SpinSector::calculateSector(double start, double end) {
                             if (annihilation(alpha_target, x) && creation(alpha_target, y)) {
                                 double phase_factor = phaseCheck(alpha_set, alpha_target);
                                 size_t address = ad_a.fetchAddress(alpha_target);
-                                addToHamiltonian(phase_factor * element, i + x * n_bf_beta, address + x * n_bf_beta);
+                                addToHamiltonian(phase_factor * element, i * n_bf_alpha + j, i * n_bf_alpha + address);
                             }
                             if (annihilation(beta_target, x) && creation(beta_target, y)) {
                                 double phase_factor = phaseCheck(beta_set, beta_target);
                                 size_t address = ad_b.fetchAddress(beta_target);
-                                addToHamiltonian(phase_factor * element, i * n_bf_alpha + x, address * n_bf_alpha + x);
+                                addToHamiltonian(phase_factor * element, i * n_bf_alpha + j, address * n_bf_alpha + j);
                             }
 
                         }
@@ -96,7 +101,10 @@ void Hubbard::SpinSector::calculateSector(double start, double end) {
         }
         beta_set = next_bitset_permutation(beta_set);
     }
+
+
     symmetryFill();
+
 
 }
 
@@ -106,11 +114,11 @@ void Hubbard::SpinSector::addToHamiltonian(double value, size_t index1, size_t i
 }
 
 void Hubbard::SpinSector::symmetryFill() {
-    hamiltonian = arma::symmatu(hamiltonian);
+    Symmatu(hamiltonian);
 
 }
 
-const arma::mat &Hubbard::SpinSector::getHamiltonian() const {
+const Eigen::MatrixXd &Hubbard::SpinSector::getHamiltonian() const {
     return hamiltonian;
 }
 
@@ -118,12 +126,17 @@ int Hubbard::SpinSector::getS_z() const {
     return S_z;
 }
 
-void Hubbard::SpinSector::setEigenvalues(const arma::vec &eigenvalues) {
+void Hubbard::SpinSector::setEigenvalues(const Eigen::VectorXd &eigenvalues) {
     SpinSector::eigenvalues = eigenvalues;
 }
 
-void Hubbard::SpinSector::setEigenvectors(const arma::mat &eigenvectors) {
+void Hubbard::SpinSector::setEigenvectors(const Eigen::MatrixXd &eigenvectors) {
     SpinSector::eigenvectors = eigenvectors;
+}
+
+void Hubbard::SpinSector::print_hamiltonian() const {
+    std::cout<<hamiltonian;
+
 }
 
 

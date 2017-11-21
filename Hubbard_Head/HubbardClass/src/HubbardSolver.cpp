@@ -6,21 +6,20 @@
 
 Hubbard::HubbardSolver::HubbardSolver(Hubbard &hubbard) : hubbard(hubbard){
     // Create groundstate with higehest energy possible (avoid using magic numbers).
-    groundstates = { State {std::numeric_limits<double>::max(),arma::vec()} };
+    groundstates = { State {std::numeric_limits<double>::max(),Eigen::VectorXd()} };
     // Diagonalize the Hamiltonian for every spin sector, and assign the eigenvalues and eigenvectors to the corresponding SpinSector instance
     for (auto& spin_sector : this->hubbard.spinSectors) {      // use reference, otherwise we would make a copy...
         auto H = spin_sector.getHamiltonian();
+        Eigen::EigenSolver<Eigen::MatrixXd> solver(H);
+        Eigen::VectorXd eigenvalues = solver.eigenvalues().real().cast<double>();
+        Eigen::MatrixXd eigenvectors = solver.eigenvectors().real().cast<double>();
 
-        arma::vec eigenvalues;
-        arma::mat eigenvectors;
-
-        arma::eig_sym(eigenvalues, eigenvectors, H);
         //We store all eigen solutions
         spin_sector.setEigenvalues(eigenvalues);
         spin_sector.setEigenvectors(eigenvectors);
         //We extract only the groundstate
         for (int i = 0; i<eigenvalues.size(); i++) {
-            groundStates(State {eigenvalues[i], eigenvectors.col(static_cast<const arma::uword>(i)), spin_sector.getS_z()});
+            groundStates(State {eigenvalues[i], eigenvectors.col(i), spin_sector.getS_z()});
         }
     }
 }
@@ -42,8 +41,9 @@ void Hubbard::HubbardSolver::groundStates(State key) {
 
 }
 
-//Hubbard::HubbardSolver::HubbardSolver() : hubbard(Hubbard()){
-
+const std::vector<State> &Hubbard::HubbardSolver::getGroundstates() const {
+    return groundstates;
+}
 
 
 bool compareState(const State &o1, const State &o2){

@@ -4,7 +4,7 @@
 
 #include "HubbardClass/include/bitset.h"
 
-#include <boost/math/special_functions.hpp>
+
 
 
 /** Give the next bitset permutation in a lexicographical sense.
@@ -16,6 +16,8 @@
  * Taken from (http://graphics.stanford.edu/~seander/bithacks.html#NextBitPermutation)
  * Credits: Dario Sneidermanis of Argentina, who provided this on November 28, 2009.
  */
+
+//
 boost::dynamic_bitset<> next_bitset_permutation(const boost::dynamic_bitset<>& v) {
     // find algorithms that works without converting to long (so we do not lose the benefit of processing a system with +128 sites).
     unsigned long v_ul = v.to_ulong();
@@ -142,7 +144,18 @@ boost::dynamic_bitset<> bitslice(const boost::dynamic_bitset<>& u, unsigned long
     }
 
     auto slice_length = j - i + 1;  // number of bits the slice will have
-    return boost::dynamic_bitset<>();
+    auto shift = i;                 // the number of places the mask will have to shift
+    // since we're working with least significant bits, this is just the number of bits to the right of the slice, i.e. the index i
+
+    // Create a mask that will pick out the relevant bits
+    boost::dynamic_bitset<> mask (u.size(), (static_cast<unsigned long>(std::pow(2, slice_length)) - 1) << shift);
+
+    // Use the mask on the input bitset, and shift the result to the right i places.
+    boost::dynamic_bitset<> v = ((u & mask) >> shift);
+
+    // We're only interested in the slice_length least significant bits
+    v.resize(slice_length);
+    return v;
 }
 
 bool annihilation( boost::dynamic_bitset<>& u, unsigned long anni){
@@ -170,7 +183,8 @@ int phaseCheck( const boost::dynamic_bitset<>& u, const boost::dynamic_bitset<>&
     auto second_site_index = changed_indices.find_next(first_site_index);
 
     auto no_indices_in_between = second_site_index - first_site_index - 1;
-    if (no_indices_in_between == 0) {
+
+    if (no_indices_in_between == 0 || u == v )  {
         // If there are no indices in between, the phase factor is (+1), since no equal-spin electrons are passed over
     } else {
         // In the region [first_site_index+1, second_site_index-1], both basis vectors bf1 and bf2 are equal, so it doesn't matter which one we take to take a bitslice

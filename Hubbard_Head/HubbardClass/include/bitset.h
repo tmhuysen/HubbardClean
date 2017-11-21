@@ -6,7 +6,7 @@
 #define HUBBARDCLEAN_BITSET_H
 
 #include <boost/dynamic_bitset.hpp>
-
+#include <boost/math/special_functions.hpp>
 
 /** Give the next bitset permutation in a lexicographical sense.
  *
