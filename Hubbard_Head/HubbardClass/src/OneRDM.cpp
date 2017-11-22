@@ -39,6 +39,13 @@ OneRDM::OneRDM(std::vector<double> coefs, unsigned nup, unsigned ndown, unsigned
 
 }
 
+/**
+ * alpha and beta evaluations for each site,
+ * The calculations are separated into two functions,
+ * because a single function would be far less elegant.
+ *
+ */
+
 void OneRDM::rdmCalc(){
     for (unsigned long i = 0; i<sites; i ++){
         for(unsigned long j = i; j<sites; j++){
@@ -54,14 +61,28 @@ void OneRDM::rdmCalc(){
 
 }
 
+
+/**
+ *
+ * @param i annihilation operator
+ * @param j creation operator
+ * @return return the sum of coefficient pairs for the evaluation
+ */
+
 double OneRDM::oneRDMAlpha(unsigned long i, unsigned long j) {
     double coefsum = 0;
+    //incase we want to parallelise on this level
     boost::dynamic_bitset<> alpha_set = ad_a.generateBinaryVector(0);
+
     for (unsigned long l = 0; l<n_bf_alpha ; l++ ){
         boost::dynamic_bitset<> alpha_target = boost::dynamic_bitset<>(alpha_set);
+        //operator evaluations
         if (annihilation(alpha_target, i) && creation(alpha_target, j)) {
             double phase_factor = phaseCheck(alpha_set, alpha_target);
             unsigned long address = ad_a.fetchAddress(alpha_target);
+            //evaluations doesn't change since operators only affect one spin
+            //Hence the evaluations can be kept for while iterating over the total basis
+            //and adjusting the addresses accordingly
             for(unsigned long k = 0; k<n_bf_beta ; k++){
                 double element_set = coefs.at(l+k*n_bf_beta);
                 double element_target = coefs.at(address + k*n_bf_beta);
@@ -76,7 +97,12 @@ double OneRDM::oneRDMAlpha(unsigned long i, unsigned long j) {
     return coefsum;
 }
 
-
+/**
+ *
+ * @param i annihilation operator
+ * @param j creation operator
+ * @return return the sum of coefficient pairs for the evaluation
+ */
 
 
 double OneRDM::oneRDMBeta(unsigned long i, unsigned long j){
