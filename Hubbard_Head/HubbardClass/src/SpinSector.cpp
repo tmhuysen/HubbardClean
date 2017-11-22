@@ -61,6 +61,108 @@ void Hubbard::SpinSector::calculateSector(double start, double end) {
     for (size_t i = 0; i < n_bf_beta * end; i++) {
         boost::dynamic_bitset<> alpha_set = ad_a.generateBinaryVector(start * n_bf_alpha);
         for (size_t j = 0; j < n_bf_alpha * end; j++) {
+            //Itterate over hopping elements
+            for (size_t x = 0; x < p.lattice.getLength(); x++){
+                double element = p.lattice.getElement(x,x);
+                    //If only evaluate non zero elements
+                if (std::abs(element) > 1.0e-06) {
+                        boost::dynamic_bitset<> beta_target = boost::dynamic_bitset<>(beta_set);
+                        boost::dynamic_bitset<> alpha_target = boost::dynamic_bitset<>(alpha_set);
+                    if (annihilation(beta_target, x) && annihilation(alpha_target, x) &&
+                        creation(alpha_target, x) && creation(beta_target, x)) {
+                            // i is the respective position of the beta bitset in the beta only basis,
+                            // in the total basis this means that the next permutation only occurs after all alpha permutaions aka n_bf_alpha.
+                            // j is the respecitve position of te alpha set thus the total position
+                            // thus the total position of a alpha_beta combined bitset is beta_pos*n_bf_alpha + alpha_pos.
+                        addToHamiltonian(element, i * n_bf_alpha + j, i * n_bf_alpha + j);
+                    }
+
+
+                }
+
+            }
+            alpha_set = next_bitset_permutation(alpha_set);
+
+        }
+        beta_set = next_bitset_permutation(beta_set);
+    }
+
+    /**
+     * Because the hopping operators only affect one electron spin at a time, we can split up the evaluation of the
+     * alpha and beta bitvectors. We now simply repeat the result of an evaluation an x amount of times.
+     * x being the dimensions of the basis of the single spin that is not being evaluated as its basis is not affected
+     * each different vector of the unaffect spin yields the same result at an easily calculated spot in the hamiltionian
+     *
+     */
+
+
+
+    beta_set = ad_b.generateBinaryVector(start * n_bf_beta);
+
+    for (size_t i = 0; i < n_bf_beta * end; i++) {
+        for (size_t x = 0; x < p.lattice.getLength(); x++){
+            for (size_t y = x+1; y < p.lattice.getLength(); y++){
+                boost::dynamic_bitset<> beta_target = boost::dynamic_bitset<>(beta_set);
+                if (annihilation(beta_target, x) && creation(beta_target, y)) {
+                    double element = p.lattice.getElement(x, y);
+                    double phase_factor = phaseCheck(beta_set, beta_target);
+                    size_t address = ad_b.fetchAddress(beta_target);
+                    for(size_t j = 0;j<n_bf_alpha;j++){
+                        // i is the respective position of the beta bitset in the beta only basis,
+                        // in the total basis this means that the next permutation only occurs after all alpha permutaions aka n_bf_alpha.
+                        // j is the respecitve position of te alpha set thus the total position
+                        // thus the total position of a alpha_beta combined bitset is beta_pos*n_bf_alpha + alpha_pos.
+                        addToHamiltonian(phase_factor * element, i * n_bf_alpha + j, address * n_bf_alpha + j);
+
+                    }
+
+                }
+
+            }
+        }
+        beta_set = next_bitset_permutation(beta_set);
+    }
+
+    boost::dynamic_bitset<> alpha_set = ad_a.generateBinaryVector(start * n_bf_alpha);
+
+    for (size_t i = 0; i < n_bf_alpha * end; i++) {
+        for (size_t x = 0; x < p.lattice.getLength(); x++){
+            for (size_t y = x+1; y < p.lattice.getLength(); y++){
+                boost::dynamic_bitset<> alpha_target = boost::dynamic_bitset<>(alpha_set);
+                if (annihilation(alpha_target, x) && creation(alpha_target, y)) {
+                    double element = p.lattice.getElement(x, y);
+                    double phase_factor = phaseCheck(alpha_set, alpha_target);
+                    size_t address = ad_a.fetchAddress(alpha_target);
+                    for(size_t j = 0;j<n_bf_beta;j++){
+                        // j is the respective position of the beta bitset in the beta only basis,
+                        // in the total basis this means that the next permutation only occurs after all alpha permutaions aka n_bf_alpha.
+                        // i is the respecitve position of te alpha set thus the total position
+                        // thus the total position of a alpha_beta combined bitset is beta_pos*n_bf_alpha + alpha_pos.
+                        addToHamiltonian(phase_factor * element, j * n_bf_alpha + i, j * n_bf_alpha + address);
+
+
+                    }
+
+                }
+
+            }
+        }
+        alpha_set = next_bitset_permutation(alpha_set);
+    }
+
+
+
+
+
+    /**
+     * OLD CODE SEMI-RELEVANT is the amount of time won worth the convolution?
+     */
+    /*
+
+    beta_set = ad_b.generateBinaryVector(start * n_bf_beta);
+    for (size_t i = 0; i < n_bf_beta * end; i++) {
+        boost::dynamic_bitset<> alpha_set = ad_a.generateBinaryVector(start * n_bf_alpha);
+        for (size_t j = 0; j < n_bf_alpha * end; j++) {
 
 
             //Itterate over hopping elements
@@ -105,12 +207,14 @@ void Hubbard::SpinSector::calculateSector(double start, double end) {
         }
         beta_set = next_bitset_permutation(beta_set);
     }
+    */
 
 
     symmetryFill();
 
 
 }
+
 
 void Hubbard::SpinSector::addToHamiltonian(double value, size_t index1, size_t index2) {
     hamiltonian(index1, index2) += value;

@@ -29,6 +29,7 @@ TEST(write_to_file_test, test_output){
     int L = 4;
     Lattice lat = Lattice(H);
     Hubbard hubby = Hubbard(4,lat);
+    hubby.print();
     double eigenTest = hubby.getGroundstates().at(0).eigenValue;
     double eigenExpected = -3.64898672;
     EXPECT_DOUBLE_EQ(eigenTest,eigenExpected);

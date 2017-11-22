@@ -54,11 +54,23 @@ private:
 
     private:
 
+        /**
+         * Calculates the hamiltonian for given sector, it has a start and end to easily implement
+         * parallelisation
+         */
         void calculateSector(double start, double end);
 
+        /**
+         *
+         * This function has been created to easily be able to implement different libraries
+         * without having to change multiple istances of adding to matrix of a given library.
+         *
+         */
         void addToHamiltonian(double value, size_t index1, size_t index2);
+        /*
+         * idem
+         */
         void symmetryFill();
-        //void calculateOneSpin(unsigned long bf_m_el, unsigned n_m_el,unsigned long bf_c_el, unsigned n_c_el, unsigned long start, unsigned long end);
 
     public:
 
@@ -74,12 +86,6 @@ private:
          */
         SpinSector(Hubbard& p, int S_z);
 
-
-
-
-        /** Helper function to print all the basis vectors belonging to the spin sector
-         */
-        void print_basis() const;
 
         /** Helper function to print the Hamiltonian belonging to the spin sector
         */
@@ -110,6 +116,7 @@ private:
         void groundStates(State key);
     public:
         /** Constructor based on a given Hubbard instance
+         *  This will simply diagonalize the hamiltonian of given sector and check if it has the lowest groundstates.
          */
         HubbardSolver(Hubbard& hubbard);
 
@@ -131,14 +138,23 @@ private:
     //          spin_sectors[0]     is the spin sector with the lowest number of alpha electrons (0)
     //          spin_sectors[N]   is the spin sector with the highest number of alpha electrons (N)
     std::vector<SpinSector> spinSectors;
+    /**
+     * @ISSUE only one solver will be used using a vector because of an error needs to be solved.
+     */
 
     std::vector<HubbardSolver> solvedHubbard;
 
     // For each distribution of electrons we will need a different addressingsMatrix these may be same for several spin sectors
     // So we storing them allows us to only generate them once.
+    // Currently not used because of error.
     std::vector<AddressingMatrix> addressing_list;
 
     void generateAddressingMatrix();
+
+    /**
+     * creates all spinsectors
+     */
+
     void calculate();
 
 

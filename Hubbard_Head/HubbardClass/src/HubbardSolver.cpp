@@ -26,6 +26,7 @@ Hubbard::HubbardSolver::HubbardSolver(Hubbard &hubbard) : hubbard(hubbard){
 /** Adds a state to the groundstate list
  *     if the state is lower than the current energy of all assumed "groundstates"
  *     the list is cleared and the new lowest state is added.
+ *     if the state is equal in energy it is added as a degenerate state.
  */
 void Hubbard::HubbardSolver::groundStates(State key) {
 
