@@ -23,12 +23,13 @@ struct State {
 
 class Hubbard
 {
+    //private classes
 private:
-
     /**
      * nesting to prevent circular inclusion
      */
     class SpinSector {
+        //private variable members
     private:
         Hubbard& p; //parent
         int S_z;
@@ -46,12 +47,35 @@ private:
         unsigned long n_bf_beta;
 
         Eigen::MatrixXd hamiltonian;
+        //public methods
     public:
+        /**
+         * getters and setters.
+         */
         const Eigen::MatrixXd &getHamiltonian() const;
         void setEigenvectors(const Eigen::MatrixXd &eigenvectors);
         void setEigenvalues(const Eigen::VectorXd &eigenvalues);
         int getS_z() const;
 
+
+        /** Default constructor
+         *
+         */
+        //SpinSector();
+
+        /** Create a spin sector with
+         *      S_z:    integer representation of total projected spin (times 2)
+         *                  total projected spin = 1/2 -> S_z = 1
+         *                  total projected spin = -1 -> S_z = -2
+         */
+        SpinSector(Hubbard& p, int S_z);
+
+
+        /** Helper function to print the Hamiltonian belonging to the spin sector
+        */
+        void print_hamiltonian() const;
+
+        //private methods
     private:
 
         /**
@@ -72,27 +96,8 @@ private:
          */
         void symmetryFill();
 
-    public:
-
-        /** Default constructor
-         *
-         */
-        //SpinSector();
-
-        /** Create a spin sector with
-         *      S_z:    integer representation of total projected spin (times 2)
-         *                  total projected spin = 1/2 -> S_z = 1
-         *                  total projected spin = -1 -> S_z = -2
-         */
-        SpinSector(Hubbard& p, int S_z);
-
-
-        /** Helper function to print the Hamiltonian belonging to the spin sector
-        */
-        void print_hamiltonian() const;
 
     };
-
     /**
      * Solver only reason this part of the class is because it can then acces the spinsectors, I could make them public instead and this would make a lot more sense.
      */
@@ -103,7 +108,15 @@ private:
 
         std::vector<State> groundstates;
     public:
+        /**
+        * getters and setters.
+        */
         const std::vector<State> &getGroundstates() const;
+
+        /** Constructor based on a given Hubbard instance
+         *  This will simply diagonalize the hamiltonian of given sector and check if it has the lowest groundstates.
+         */
+        HubbardSolver(Hubbard& hubbard);
 
     private:
         // The ground states  of the Hubbard system (i.e. the state with the lowest energy).
@@ -114,20 +127,11 @@ private:
          * the list is cleared and the new lowest state is added.
         */
         void groundStates(State key);
-    public:
-        /** Constructor based on a given Hubbard instance
-         *  This will simply diagonalize the hamiltonian of given sector and check if it has the lowest groundstates.
-         */
-        HubbardSolver(Hubbard& hubbard);
+
 
 
     };
-public:
-    Hubbard(unsigned N, const Lattice& lattice);
-    const std::vector<SpinSector> &getSpinSectors() const;
-    void print();
-    std::vector<State> getGroundstates();
-
+    //private members
 private:
     unsigned N; // The number of electrons to place in the lattice
     const Lattice& lattice; // REFERENCE to a lattice. A reference is used to avoid copying.
@@ -148,15 +152,27 @@ private:
     // So we storing them allows us to only generate them once.
     // Currently not used because of error.
     std::vector<AddressingMatrix> addressing_list;
+    //public methods
+public:
+    /**
+     * getters & setters
+     */
+    const std::vector<SpinSector> &getSpinSectors() const;
+    std::vector<State> getGroundstates();
+    /**
+     * Constructor
+     */
+    Hubbard(unsigned N, const Lattice& lattice);
 
-    void generateAddressingMatrix();
+    void print();
 
+    //private methods
+private:
     /**
      * creates all spinsectors
      */
-
     void calculate();
-
+    void generateAddressingMatrix();
 
 
 };
