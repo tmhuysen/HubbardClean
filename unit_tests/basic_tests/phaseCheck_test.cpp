@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "HubbardClass/include/bitset.h"
+#include "include/bitset.h"
 
 TEST(phaseCheck_test, test_output){
 

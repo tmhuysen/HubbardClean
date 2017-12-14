@@ -3,8 +3,8 @@
 //
 
 #include "gtest/gtest.h"
-#include "Hubbard.h"
-#include "HubbardClass/include/OneRDM.h"
+#include "include/Hubbard.h"
+#include "include/OneRDM.h"
 
 TEST(write_to_file_test, test_output){
     const std::string filename = "/Users/wulfix/Desktop/Cursussen_Gent/Thesis/Hubbards_Qmark/HubbardClean/unit_tests/basic_tests/input_data/hopping_matrix3.data";

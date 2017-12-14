@@ -4,8 +4,8 @@
 
 
 #include "gtest/gtest.h"
-#include "HubbardClass/include/io.h"
-#include "Hubbard.h"
+#include "include/io.h"
+#include "include/Hubbard.h"
 
 TEST(io_test, test){
     // For four sites, an example hopping matrix can be found in the following file

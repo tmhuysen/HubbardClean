@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "HubbardClass/include/OneRDM.h"
+#include "include/OneRDM.h"
 
 TEST(OneRDM_test, test_output){
     std::vector<double> testDoubles = {0.25,-0.25,0,0,0.25,-0.25,-0.25,0.25,0,0,-0.25,0.25,0,0,0,0,0,0,0,0,0,0,0,0,0.25,-0.25,0,0,0.25,-0.25,-0.25,0.25,0,0,-0.25,0.25};

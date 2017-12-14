@@ -11,10 +11,10 @@ set(CMAKE_CXX_STANDARD 11)
 
 
 
-file(GLOB SOURCES "HubbardClass/src/*.cpp" "HubbardClass/include/*.h")
+file(GLOB SOURCES "src/*.cpp" "include/*.h")
 
 
-add_library(Hubbard_Head SHARED ${SOURCES} Hubbard.cpp Hubbard.h)
+add_library(Hubbard_Head SHARED ${SOURCES} src/Hubbard.cpp include/Hubbard.h)
 
 find_package(eigen3)
 if (EIGEN3_FOUND)

@@ -4,7 +4,7 @@
 
 
 #include "gtest/gtest.h"
-#include "HubbardClass/include/AddressingMatrix.h"
+#include "include/AddressingMatrix.h"
 
 TEST(address_Test, test) {
 
